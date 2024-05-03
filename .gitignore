@@ -1,0 +1,4 @@
+data/*_pages_current.xml
+src/config.sensitive.php
+.docker/mariadb/data/**
+src/release/**

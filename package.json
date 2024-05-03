@@ -1,0 +1,16 @@
+{
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"————— dev —————": "",
+		"generate-unlocks-json": "docker exec -it isaac-apache-php83-1 php /var/www/html/tools/generate_unlocks_json.php",
+		"————— build —————": "",
+		"build-release": "docker exec -it isaac-apache-php83-1 php /var/www/html/tools/generate_release.php",
+		"————— docker —————": "",
+		"docker-up": "docker compose up -d",
+		"docker-up-dev": "docker compose up",
+		"docker-build": "docker compose build",
+		"docker-restart": "docker compose restart",
+		"docker-stop": "docker compose stop"
+	}
+}

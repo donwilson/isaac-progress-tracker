@@ -1,0 +1,11 @@
+GetPlayerSummaries:
+http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=STEAM_API_KEY&steamids=STEAM_USER_ID
+
+GetOwnedGames:
+http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=STEAM_API_KEY&steamids=STEAM_USER_ID&format=json
+
+GetUserStatsForGame:
+http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?key=STEAM_API_KEY&steamid=STEAM_USER_ID&appid=STEAM_APP_ID
+
+ResolveVanityURL:
+http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=STEAM_API_KEY
