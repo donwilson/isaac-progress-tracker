@@ -6,6 +6,7 @@
 		"generate-unlocks-json": "docker exec -it isaac-apache-php83-1 php /var/www/html/tools/generate_unlocks_json.php",
 		"————— build —————": "",
 		"build-release": "docker exec -it isaac-apache-php83-1 php /var/www/html/tools/generate_release.php",
+		"publish-release": "aws s3 sync ./src/release/ s3://isaac.pyxol.com/",
 		"————— docker —————": "",
 		"docker-up": "docker compose up -d",
 		"docker-up-dev": "docker compose up",

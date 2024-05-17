@@ -131,7 +131,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p>This tool helps you track your progress in The Binding of Isaac: Rebirth by showing you which achievements you haven't unlocked yet.</p>
+					<p>This tool helps you track progress in The Binding of Isaac: Rebirth by showing you which achievements you haven't unlocked yet.</p>
 					<p>The <strong>Percentage (%)</strong> column shows the percentage of players that have unlocked that achievement.</p>
 					<p class="d-none d-md-block">The <strong>Character</strong> and <strong>Boss</strong> columns show the character or boss required to unlock that achievement.</p>
 					<p>This app is inspired by <a href="https://theriebel.de/tboirah/" class="text-muted" rel="noopener noreferrer nofollow" target="_blank">Rebirth Achievement Helper</a> and uses data from the <a href="https://bindingofisaacrebirth.fandom.com/" class="text-muted" rel="noopener noreferrer nofollow" target="_blank">Rebirth Wiki</a>.</p>
@@ -160,7 +160,7 @@
 					</div>
 					
 					<div class="mt-3">
-						<small class="text-muted">You can find your Steam ID by using <a href="https://www.steamidfinder.com/" rel="noopener noreferrer nofollow" target="_blank">SteamID Finder</a>. The number should be 17 characters long.</small>
+						<small class="text-muted">You can find your Steam ID by using <a href="https://www.steamidfinder.com/" rel="noopener noreferrer nofollow" target="_blank">SteamID Finder</a>. You're looking for the <strong>"steamID64 (Dec)"</strong> number, it should be 17 characters long.</small>
 					</div>
 					
 					<div class="mt-3">
@@ -967,6 +967,9 @@
 			const modal = bootstrap.Modal.getInstance(document.getElementById("steam-id-modal"));
 			modal.hide();
 			
+			// add the steam id to the URL hash
+			window.location.hash = steamId;
+			
 			// fetch the steam user's progress data
 			fetch_steam_user_progress(steamId);
 		});
@@ -988,6 +991,11 @@
 					localStorage.removeItem(STORAGE_KEY_PROGRESS);
 				}
 				
+				// if steam id is in the URL, remove it
+				if(window.location.hash.match(/^#[0-9]{17}$/)) {
+					window.location.hash = "";
+				}
+				
 				// update the progress data
 				update_my_progress();
 			}, 500);
@@ -995,6 +1003,17 @@
 		
 		// initialize the app
 		try {
+			// if the hash is the steam user ID, save it to localStorage and fetch the progress data
+			if(window.location.hash.match(/^#[0-9]{17}$/)) {
+				const steamId = window.location.hash.substr(1);
+				
+				if("undefined" !== typeof localStorage) {
+					localStorage.setItem(STORAGE_KEY_STEAM_ID, steamId);
+				}
+				
+				fetch_steam_user_progress(steamId);
+			}
+			
 			load_unlocks_data();
 			
 			// load the progress data from localStorage (if available)
